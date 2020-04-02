@@ -1,0 +1,27 @@
+name: Vue.js CI build workflow
+
+on:
+  push:
+    branches:
+      - 'deploy/vuejs'
+  pull_request:
+    branches:
+      - 'deploy/vuejs'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: "12.x"
+    - name: npm install, and test
+      run: |
+        npm install
+        npm run build
+      env:
+        CI: true
