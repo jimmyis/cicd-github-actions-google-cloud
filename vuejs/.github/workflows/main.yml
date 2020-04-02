@@ -3,10 +3,7 @@ name: Vue.js CI build workflow
 on:
   push:
     branches:
-      - 'deploy/vuejs'
-  pull_request:
-    branches:
-      - 'deploy/vuejs'
+      - deploy/vuejs
 
 jobs:
   build:
@@ -21,6 +18,7 @@ jobs:
         node-version: "12.x"
     - name: npm install, and test
       run: |
+        cd vuejs
         npm install
         npm run build
       env:
