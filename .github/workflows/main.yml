@@ -1,6 +1,12 @@
 name: Vue.js CI build workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - deploy/vuejs
+  pull_request:
+    branches:
+      - deploy/vuejs
 
 jobs:
   build:
