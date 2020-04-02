@@ -22,6 +22,8 @@ jobs:
     - name: npm install, and test
       run: |
         cd vuejs
+        rm package.json
+        mv package.json.deploy package.json
         npm install
         npm run build
       env:
