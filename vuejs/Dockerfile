@@ -4,8 +4,9 @@ RUN npm install -g http-server
 
 WORKDIR /app
 
-COPY package.json.deploy ./package.json
-COPY package-lock.json.deploy ./package-lock.json
+# COPY package.json.deploy ./package.json
+# COPY package-lock.json.deploy ./package-lock.json
+COPY package*.json ./
 
 RUN npm install
 
