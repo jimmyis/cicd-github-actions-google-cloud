@@ -22,26 +22,32 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-      version: '286.0.0'
-      service_account_email: ${{ secrets.GCE_SA_EMAIL }}
-      service_account_key: ${{ secrets.GCE_SA_KEY }}
-      project_id: ${{ secrets.GCE_PROJECT }}
+        version: '286.0.0'
+        service_account_email: ${{ secrets.GCE_SA_EMAIL }}
+        service_account_key: ${{ secrets.GCE_SA_KEY }}
+        project_id: ${{ secrets.GCE_PROJECT }}
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
     - run: |-
-      gcloud --quiet auth configure-docker
+        gcloud --quiet auth configure-docker
 
-    # Push the Docker image to Google Container Registry
-    - name: Publish
+    # Build the Docker image
+    - name: Build
       run: |
         cd vuejs
+        docker build --tag "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" .
+  
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |-
         docker push "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA"
+
     - name: Deploy
       run: |-
         gcloud compute instances update-container "$GCE_INSTANCE" \
