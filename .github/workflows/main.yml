@@ -34,7 +34,7 @@ jobs:
 
     - name: Deploy
       run: |-
-        gcloud compute ssh --project $PROJECT_ID --zone $GCE_INSTANCE_ZONE sa-github-actions@$GCE_INSTANCE --command 'ls -la'
+        gcloud compute ssh --project $PROJECT_ID --zone $GCE_INSTANCE_ZONE sa-github-actions@$GCE_INSTANCE --command 'ls -la && sudo docker ps -a'
 
       # gcloud compute instances update-container "$GCE_INSTANCE" \
         #   --zone "$GCE_INSTANCE_ZONE" \
