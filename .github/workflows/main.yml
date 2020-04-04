@@ -56,7 +56,7 @@ jobs:
           --project $PROJECT_ID \
           --zone $GCE_INSTANCE_ZONE \
           sa-github-actions@$GCE_INSTANCE \
-          --command ' \
+          --command '\
           sudo docker stop ${{ env.APP_NAME }}; \
           sudo docker rm ${{ env.APP_NAME }}; \
           sudo docker run -it -d -p 8080:8080 \
