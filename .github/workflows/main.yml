@@ -35,7 +35,15 @@ jobs:
 
     - name: Deploy
       run: |-
-        gcloud compute ssh --project $PROJECT_ID --zone $GCE_INSTANCE_ZONE sa-github-actions@$GCE_INSTANCE --command 'sudo docker stop ${{ env.APP_NAME }} | sudo docker rm ${{ env.APP_NAME }} | sudo docker run -it -d -p 8080:8080 --name ${{ env.APP_NAME }} gcr.io/studx-dev/studx-development-image@sha256:4f9144794aa2543c748d0fe45aaa92c83931662a077c7ee5b0f8aca4dc8fe976'
+        gcloud compute ssh \
+          --project $PROJECT_ID \
+          --zone $GCE_INSTANCE_ZONE \
+          sa-github-actions@$GCE_INSTANCE \
+          --command ' \
+          sudo docker stop ${{ env.APP_NAME }} \
+          | sudo docker rm ${{ env.APP_NAME }} \
+          | sudo docker run -it -d -p 8080:8080 \
+            --name ${{ env.APP_NAME }} gcr.io/studx-dev/studx-development-image@sha256:4f9144794aa2543c748d0fe45aaa92c83931662a077c7ee5b0f8aca4dc8fe976'
 
 
       # gcloud compute instances update-container "$GCE_INSTANCE" \
