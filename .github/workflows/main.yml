@@ -42,12 +42,12 @@ jobs:
     - name: Build
       run: |
         cd vuejs
-        docker build --tag "asia.gcr.io/$PROJECT_ID/$GCE_INSTANCE-$APP_NAME-image:$GITHUB_SHA" .
+        docker build --tag "asia.gcr.io/$PROJECT_ID/$APP_NAME--image:$GITHUB_SHA" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "asia.gcr.io/$PROJECT_ID/$GCE_INSTANCE-$APP_NAME-image:$GITHUB_SHA"
+        docker push "asia.gcr.io/$PROJECT_ID/$APP_NAME--image:$GITHUB_SHA"
 
     - name: Deploy
       run: |-
@@ -59,7 +59,8 @@ jobs:
           sudo docker stop ${{ env.APP_NAME }}; \
           sudo docker rm ${{ env.APP_NAME }}; \
           sudo docker run -it -d -p 8080:8080 \
-            --name ${{ env.APP_NAME }} gcr.io/studx-dev/studx-development-image@sha256:4f9144794aa2543c748d0fe45aaa92c83931662a077c7ee5b0f8aca4dc8fe976'
+            --name ${{ env.APP_NAME }} \
+            asia.gcr.io/${{ env.PROJECT_ID }}/${{ env.APP_NAME }}--image:${{ env.GITHUB_SHA }}'
 
       # gcloud compute instances update-container "$GCE_INSTANCE" \
         #   --zone "$GCE_INSTANCE_ZONE" \
