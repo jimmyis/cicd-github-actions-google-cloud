@@ -50,7 +50,7 @@ jobs:
 
     - name: Deploy
       run: |-
-        apt update && sudo apt install python python-pip -y
+        apt update && apt install python python-pip -y
         pip install --upgrade google-api-python-client
         curl -O https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/master/compute/oslogin/service_account_ssh.py
         python service_account_ssh.py \
