@@ -1,10 +1,10 @@
-FROM nginx:stable
+FROM nginx:stable-alpine
 
 WORKDIR /app
 
 RUN ls -la
 
-# COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY dist .
 
