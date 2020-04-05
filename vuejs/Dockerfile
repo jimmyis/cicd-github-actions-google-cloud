@@ -1,18 +1,11 @@
-FROM node:lts-alpine
+FROM nginx:stable-alpine
 
-RUN npm install -g http-server
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /app
 
-# COPY package.json.deploy ./package.json
-# COPY package-lock.json.deploy ./package-lock.json
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-RUN npm run build
+COPY ./dist .
 
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+
+CMD [ "nginx", "-g", "daemon off;" ]
