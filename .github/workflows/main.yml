@@ -65,7 +65,7 @@ jobs:
           --command '\
           sudo docker stop ${{ env.APP_NAME }}; \
           sudo docker rm ${{ env.APP_NAME }}; \
-          sudo docker rmi asia.gcr.io/studx-dev/vuejs-webapp-cicd-sample--image:latest; \
+          sudo docker rmi asia.gcr.io/${{ env.PROJECT_ID }}/${{ env.APP_NAME }}--image:latest; \
           sudo docker run -it -d -p ${{ env.HOST_PORT }}:80 \
             --name ${{ env.APP_NAME }} \
             asia.gcr.io/${{ env.PROJECT_ID }}/${{ env.APP_NAME }}--image:latest'
