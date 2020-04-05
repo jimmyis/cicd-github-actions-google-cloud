@@ -14,7 +14,7 @@ export default {
     HelloWorld
   },
   mounted() {
-    /* eslint-disable no-console; */
+    /* eslint-disable no-console */
     console.log(process.env);
   }
 }
