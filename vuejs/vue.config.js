@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-onsole.log(process.env);
+console.log(process.env);
 
 module.exports = {
 
