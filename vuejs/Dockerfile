@@ -1,11 +1,11 @@
 FROM nginx:stable-alpine
 
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ../.deployment/nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /app
 
 COPY ./dist .
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD [ "nginx", "-g", "daemon off;" ]
