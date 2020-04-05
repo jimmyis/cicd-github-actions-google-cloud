@@ -12,6 +12,10 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted() {
+    /* eslint-disable no-console; */
+    console.log(process.env);
   }
 }
 </script>
