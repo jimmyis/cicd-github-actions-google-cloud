@@ -1,12 +1,14 @@
 FROM nginx:stable-alpine
 
-RUN ls -la
-
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
 WORKDIR /app
 
-COPY ./dist .
+RUN ls -la
+
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY dist .
+
+RUN ls -la
 
 EXPOSE 80
 
