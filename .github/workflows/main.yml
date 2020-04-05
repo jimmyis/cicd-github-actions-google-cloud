@@ -47,6 +47,7 @@ jobs:
         npm install
         npm run build
         cp ../.deployment/nginx.conf .
+        ls -la
         docker build --tag "asia.gcr.io/$PROJECT_ID/$APP_NAME--image:$GITHUB_SHA" .
 
     # Push the Docker image to Google Container Registry
